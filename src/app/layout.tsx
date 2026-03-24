@@ -24,7 +24,7 @@ export default function RootLayout({
       <Script
         src="https://widget.veroliq.com/widget.js"
         data-site-id="cmn0e7ow10000xxugmvtd7s64"
-        data-api-base-url="http://localhost:3001/api"
+        data-api-base-url="http://localhost:3001"
         async
         defer
       />
