@@ -14,7 +14,6 @@ import {
   Check,
   ChevronDown,
   Clock,
-  ExternalLink,
   Layers,
   Play,
   Sparkles,
@@ -284,7 +283,7 @@ function FloatingChatCard() {
           color: "white",
         }}
       >
-        We have 4 plans from Free to $49/mo — I can walk you through which fits
+        We have 3 plans from Free to $15/mo — I can walk you through which fits
         best. What's your email so I can send the details?
       </div>
     </motion.div>
@@ -729,20 +728,6 @@ export default function LandingPage() {
                       Start free — no card needed
                       <ArrowRight size={16} />
                     </Link>
-                    <Link
-                      href="/demo"
-                      className="flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold"
-                      style={{
-                        background: "rgba(255,255,255,0.06)",
-                        color: "var(--color-slate-200)",
-                        textDecoration: "none",
-                        fontSize: "15px",
-                        border: "1px solid rgba(255,255,255,0.1)",
-                      }}
-                    >
-                      <Play size={14} fill="currentColor" />
-                      Watch it work
-                    </Link>
                   </div>
 
                   {/* Trust indicators */}
@@ -978,7 +963,7 @@ export default function LandingPage() {
                     icon: "🏢",
                     label: "Digital agencies",
                     title: "AI on every client site",
-                    desc: "Manage all client websites from one dashboard. Per-site analytics, individual knowledge bases, and white-label widget options. Add a new revenue line to your agency.",
+                    desc: "Manage all client websites from one dashboard. Per-site analytics, individual knowledge bases, and custom widget styling. Add a new revenue line to your agency.",
                     tags: ["Multi-site", "White-label", "Reporting"],
                   },
                 ].map(({ icon, label, title, desc, tags }) => (
@@ -1956,7 +1941,7 @@ export default function LandingPage() {
               </div>
             </FadeIn>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
               {[
                 {
                   name: "Free",
@@ -1965,9 +1950,8 @@ export default function LandingPage() {
                   desc: "For solo founders testing the waters",
                   features: [
                     "1 website",
-                    "30 pages crawled",
-                    "100 chats / month",
-                    "10 leads / month",
+                    "350 chats / month",
+                    "Unlimited leads",
                     "Basic analytics",
                     `${platformName} branding`,
                   ],
@@ -1975,13 +1959,12 @@ export default function LandingPage() {
                 },
                 {
                   name: "Starter",
-                  price: annual ? "$49" : "$5",
+                  price: annual ? "$79" : "$8",
                   period: annual ? "/yr" : "/mo",
                   desc: "For founders ready to capture every lead",
                   features: [
-                    "1 website",
-                    "100 pages crawled",
-                    "500 chats / month",
+                    "3 websites",
+                    "5,000 chats / month",
                     "Unlimited leads",
                     "3 AI actions",
                     `Remove ${platformName} branding`,
@@ -1993,35 +1976,19 @@ export default function LandingPage() {
                 },
                 {
                   name: "Growth",
-                  price: annual ? "$149" : "$15",
+                  price: annual ? "$148" : "$15",
                   period: annual ? "/yr" : "/mo",
                   desc: "For teams with multiple sites",
                   features: [
-                    "5 websites",
-                    "500 pages per site",
-                    "Unlimited chats & leads",
+                    "10 websites",
+                    "20,000 chats / month",
+                    "Unlimited leads",
                     "5 AI actions",
                     "Advanced analytics",
                     "Escalation alerts",
                     "Priority support",
                   ],
                   cta: "Start Growth",
-                },
-                {
-                  name: "Business",
-                  price: annual ? "$399" : "$49",
-                  period: annual ? "/yr" : "/mo",
-                  desc: "For agencies and high-volume teams",
-                  features: [
-                    "Unlimited websites",
-                    "Unlimited pages",
-                    "Unlimited chats & leads",
-                    "Unlimited AI actions",
-                    "Bring your own AI key",
-                    "White-label widget",
-                    "Dedicated support",
-                  ],
-                  cta: "Contact sales",
                 },
               ].map((p) => (
                 <PlanCard
@@ -2043,7 +2010,7 @@ export default function LandingPage() {
               style={{ fontSize: "13px", color: "var(--color-text-tertiary)" }}
             >
               All plans include SSL, 99.9% uptime SLA, and GDPR-compliant data
-              handling · Payments via Paddle
+              handling
             </p>
           </div>
         </section>
@@ -2099,11 +2066,11 @@ export default function LandingPage() {
               },
               {
                 q: "Is visitor data safe and GDPR-compliant?",
-                a: "All data is encrypted in transit and at rest. We are fully GDPR-compliant. Visitor conversation data is stored in our EU data centre by default. On Business plan, you can specify your preferred region. We never sell or share your data.",
+                a: "All data is encrypted in transit and at rest. We are fully GDPR-compliant. Visitor conversation data is stored securely by default. We never sell or share your data.",
               },
               {
                 q: "Can I use my own OpenAI or Google AI key?",
-                a: "Yes — BYOK (Bring Your Own Key) is available on Business plan. Connect your OpenAI or Google Gemini key and all AI calls route through your account, giving you full billing transparency and model control.",
+                a: "Yes — BYOK (Bring Your Own Key) is available on Growth plan. Connect your OpenAI or Google Gemini key and all AI calls route through your account, giving you full billing transparency and model control.",
               },
             ].map((item) => (
               <FAQItem key={item.q} q={item.q} a={item.a} />
@@ -2202,20 +2169,6 @@ export default function LandingPage() {
                 >
                   Start for free — no card needed
                   <ArrowRight size={18} />
-                </Link>
-                <Link
-                  href="/demo"
-                  className="flex items-center gap-2 px-8 py-4 rounded-xl font-semibold"
-                  style={{
-                    background: "transparent",
-                    color: "white",
-                    textDecoration: "none",
-                    fontSize: "16px",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                  }}
-                >
-                  <ExternalLink size={16} />
-                  See the demo first
                 </Link>
               </div>
               <p style={{ fontSize: "13px", color: "var(--color-slate-500)" }}>
