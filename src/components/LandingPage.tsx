@@ -777,6 +777,7 @@ export default function LandingPage() {
                       alt="Founder reviewing leads on their dashboard"
                       width={900}
                       height={420}
+                      loading="eager"
                       className="w-full object-cover"
                       style={{
                         height: "420px",
@@ -1484,6 +1485,7 @@ export default function LandingPage() {
                     alt={`Team using ${platformName} dashboard`}
                     width={800}
                     height={400}
+                    loading="eager"
                     className="w-full object-cover"
                     style={{ height: "400px" }}
                     sizes="(max-width: 1024px) 100vw, 50vw"

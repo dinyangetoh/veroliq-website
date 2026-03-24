@@ -1,7 +1,7 @@
 export const platformName = "Veroliq";
 
 /** Public static paths (files in `/public`). */
-export const brandLogoFullSrc = "/verloliq-logo.png";
+export const brandLogoFullSrc = "/veroliq-logo.png";
 export const brandLogoIconSrc = "/veroliq-icon.png";
 export const assistantName = "Vera AI";
 export const assistantNameShort = "Vera";

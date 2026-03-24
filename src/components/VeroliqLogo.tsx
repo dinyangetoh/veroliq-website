@@ -1,7 +1,11 @@
 "use client";
 
+import {
+  brandLogoFullSrc,
+  brandLogoIconSrc,
+  platformName,
+} from "@/lib/branding";
 import Image from "next/image";
-import { brandLogoFullSrc, brandLogoIconSrc, platformName } from "@/lib/branding";
 
 export type VeroliqLogoProps = {
   variant: "auth" | "sidebar" | "marketing";
@@ -11,13 +15,19 @@ export type VeroliqLogoProps = {
   className?: string;
 };
 
-const marketingLockupHeightPx: Record<NonNullable<VeroliqLogoProps["size"]>, number> = {
+const marketingLockupHeightPx: Record<
+  NonNullable<VeroliqLogoProps["size"]>,
+  number
+> = {
   sm: 28,
   md: 36,
   lg: 44,
 };
 
-const marketingWordmarkSize: Record<NonNullable<VeroliqLogoProps["size"]>, string> = {
+const marketingWordmarkSize: Record<
+  NonNullable<VeroliqLogoProps["size"]>,
+  string
+> = {
   sm: "14px",
   md: "18px",
   lg: "24px",
@@ -38,6 +48,7 @@ export function VeroliqLogo({
           alt="Veroliq"
           width={280}
           height={84}
+          loading="eager"
           className="h-10 sm:h-12 w-auto max-w-[min(100%,280px)] object-contain object-center"
           priority
         />
