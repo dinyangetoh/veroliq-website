@@ -4,7 +4,7 @@ Marketing site for [Veroliq](https://www.veroliq.com): landing page at `/`, opti
 
 ## Stack
 
-Next.js 15 (App Router), React 18, TypeScript, Tailwind CSS v4, Motion, Lucide icons, Sonner toasts.
+Next.js (App Router), React 18, TypeScript, Tailwind CSS v4, Motion, Lucide icons, Sonner toasts.
 
 ## Setup
 
@@ -21,7 +21,7 @@ Dev server runs on **port 2999** (see `package.json` scripts and `PORT` in `.env
 | Variable | Purpose |
 |----------|---------|
 | `PORT` | Local dev port (optional; aligns with `next dev --port`) |
-| `NEXT_PUBLIC_VEROLIQ_API_URL` | API base URL if the site calls your backend |
+| `NEXT_PUBLIC_VEROLIQ_API_URL` | API base URL if the site calls **veroliq-api** (routes use domain prefixes such as `account/auth`, `workspace/sites`, `engagement/…`; append your gateway segment if you use one, e.g. `/api`) |
 | `NEXT_PUBLIC_VEROLIQ_LOGIN_URL` | Sign-in link (nav) |
 | `NEXT_PUBLIC_VEROLIQ_ONBOARDING_URL` | Get-started / onboarding CTAs |
 
