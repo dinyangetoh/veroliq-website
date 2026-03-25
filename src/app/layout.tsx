@@ -37,7 +37,6 @@ export default function RootLayout({
       <body>
         <Providers>{children}</Providers>
       </body>
-      {/* <Script src="https://cdn.jsdelivr.net/npm/veraliq-sdk@latest/dist/veraliq.min.js" /> */}
 
       <Script
         src="https://widget.veroliq.com/widget.js"
