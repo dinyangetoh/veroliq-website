@@ -2233,30 +2233,31 @@ export default function LandingPage() {
                   🌍 {marketingDomain}
                 </p>
               </div>
-              {[
-                {
-                  heading: "Product",
-                  links: ["Features", "Pricing", "Changelog", "Roadmap"],
-                },
-                {
-                  heading: "Resources",
-                  links: [
-                    "Documentation",
-                    "API Reference",
-                    "Integrations",
-                    "Blog",
-                  ],
-                },
-                {
-                  heading: "Company",
-                  links: [
-                    "About",
-                    "Privacy Policy",
-                    "Terms of Service",
-                    "Contact",
-                  ],
-                },
-              ].map((col) => (
+              {(
+                [
+                  {
+                    heading: "Product",
+                    links: [
+                      { label: "Features", href: "/#features" },
+                      { label: "How it works", href: "/#how-it-works" },
+                      { label: "Pricing", href: "/#pricing" },
+                    ],
+                  },
+                  {
+                    heading: "Legal",
+                    links: [
+                      { label: "Privacy Policy", href: "/privacy" },
+                      { label: "Terms of Service", href: "/terms" },
+                    ],
+                  },
+                  {
+                    heading: "Connect",
+                    links: [
+                      { label: "Contact", href: "mailto:hello@veroliq.com" },
+                    ],
+                  },
+                ] as { heading: string; links: { label: string; href: string }[] }[]
+              ).map((col) => (
                 <div key={col.heading}>
                   <p
                     style={{
@@ -2272,9 +2273,9 @@ export default function LandingPage() {
                   </p>
                   <ul className="space-y-2">
                     {col.links.map((link) => (
-                      <li key={link}>
+                      <li key={link.label}>
                         <a
-                          href="#"
+                          href={link.href}
                           style={{
                             fontSize: "13px",
                             color: "var(--color-text-secondary)",
@@ -2289,7 +2290,7 @@ export default function LandingPage() {
                               "var(--color-text-secondary)")
                           }
                         >
-                          {link}
+                          {link.label}
                         </a>
                       </li>
                     ))}
