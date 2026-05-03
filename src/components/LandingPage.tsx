@@ -10,11 +10,14 @@ import {
 import {
   ArrowRight,
   BarChart3,
+  Bell,
   Bot,
   Check,
   ChevronDown,
   Clock,
   Layers,
+  MapPin,
+  MessageSquare,
   Play,
   Sparkles,
   Target,
@@ -283,8 +286,8 @@ function FloatingChatCard() {
           color: "white",
         }}
       >
-        We have 3 plans from Free to $15/mo — I can walk you through which fits
-        best. What's your email so I can send the details?
+        We start free with no card needed — I can walk you through which plan
+        fits best. What's your email so I can send the details?
       </div>
     </motion.div>
   );
@@ -407,6 +410,8 @@ function PlanCard({
   cta,
   highlight,
   badge,
+  comingSoon,
+  href,
 }: {
   name: string;
   price: string;
@@ -416,6 +421,8 @@ function PlanCard({
   cta: string;
   highlight?: boolean;
   badge?: string;
+  comingSoon?: boolean;
+  href?: string;
 }) {
   return (
     <div
@@ -430,14 +437,18 @@ function PlanCard({
         boxShadow: highlight
           ? "0 0 0 4px rgba(29,78,216,0.08), 0 24px 64px rgba(29,78,216,0.15)"
           : "none",
+        opacity: comingSoon ? 0.7 : 1,
       }}
     >
-      {badge && (
+      {(badge || comingSoon) && (
         <div
           className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
-          style={{ background: "var(--color-brand-600)", color: "white" }}
+          style={{
+            background: comingSoon ? "var(--color-slate-500)" : "var(--color-brand-600)",
+            color: "white",
+          }}
         >
-          {badge}
+          {comingSoon ? "Coming soon" : badge}
         </div>
       )}
       <p
@@ -511,17 +522,43 @@ function PlanCard({
           </li>
         ))}
       </ul>
-      <button
-        className="w-full py-3 rounded-xl text-sm font-semibold"
-        style={{
-          background: highlight ? "var(--color-brand-600)" : "transparent",
-          color: highlight ? "white" : "var(--color-brand-600)",
-          border: highlight ? "none" : "1.5px solid var(--color-brand-300)",
-          cursor: "pointer",
-        }}
-      >
-        {cta}
-      </button>
+      {comingSoon ? (
+        <div
+          className="w-full py-3 rounded-xl text-sm font-semibold text-center"
+          style={{
+            background: "var(--color-slate-100)",
+            color: "var(--color-slate-400)",
+            border: "1.5px solid var(--color-slate-200)",
+          }}
+        >
+          Coming soon
+        </div>
+      ) : href ? (
+        <Link
+          href={href}
+          className="w-full py-3 rounded-xl text-sm font-semibold text-center block"
+          style={{
+            background: highlight ? "var(--color-brand-600)" : "transparent",
+            color: highlight ? "white" : "var(--color-brand-600)",
+            border: highlight ? "none" : "1.5px solid var(--color-brand-300)",
+            textDecoration: "none",
+          }}
+        >
+          {cta}
+        </Link>
+      ) : (
+        <button
+          className="w-full py-3 rounded-xl text-sm font-semibold"
+          style={{
+            background: highlight ? "var(--color-brand-600)" : "transparent",
+            color: highlight ? "white" : "var(--color-brand-600)",
+            border: highlight ? "none" : "1.5px solid var(--color-brand-300)",
+            cursor: "pointer",
+          }}
+        >
+          {cta}
+        </button>
+      )}
     </div>
   );
 }
@@ -530,8 +567,6 @@ function PlanCard({
    MAIN PAGE
 ══════════════════════════════════════════════ */
 export default function LandingPage() {
-  const [annual, setAnnual] = useState(false);
-
   return (
     <>
       {/* Outside overflow wrapper so position:sticky sticks to the viewport (overflow-x breaks sticky). */}
@@ -677,7 +712,7 @@ export default function LandingPage() {
                         fontWeight: 500,
                       }}
                     >
-                      AI website assistant · live in 5 minutes
+                      Now in public beta · free to get started
                     </span>
                   </div>
 
@@ -866,10 +901,10 @@ export default function LandingPage() {
                     sub: "Across all customers",
                   },
                   {
-                    n: 5,
-                    suffix: "/mo",
-                    label: "Starter plan",
-                    sub: "Less than a coffee",
+                    n: 8,
+                    suffix: "+",
+                    label: "platforms supported",
+                    sub: "One tag · any CMS",
                   },
                 ].map(({ n, suffix, label, sub }) => (
                   <div
@@ -1295,7 +1330,7 @@ export default function LandingPage() {
                 </div>
               </FadeIn>
 
-              {/* Bottom row — 3 smaller cards */}
+              {/* Bottom rows — 6 smaller cards */}
               {[
                 {
                   Icon: Clock,
@@ -1318,8 +1353,29 @@ export default function LandingPage() {
                   title: "One dashboard, every client site",
                   desc: "Agencies manage all client websites in one place — per-site analytics, knowledge bases, and widget configs.",
                 },
+                {
+                  Icon: Bell,
+                  color: "var(--color-brand-600)",
+                  bg: "var(--color-brand-50)",
+                  title: "Reaches out before they click",
+                  desc: `${assistantNameShort} shows a proactive callout after a configurable delay — greeting visitors who haven't clicked the widget yet. Returning users see a \"welcome back\" prompt to continue where they left off.`,
+                },
+                {
+                  Icon: MapPin,
+                  color: "var(--color-success-600)",
+                  bg: "var(--color-success-50)",
+                  title: "Follows their journey, page by page",
+                  desc: `Every page a visitor visits — even on React and Next.js SPAs — is tracked in real time. ${platformName} builds a full picture of where leads came from, which pages convert, and how visitors navigate before they buy.`,
+                },
+                {
+                  Icon: MessageSquare,
+                  color: "#7C3AED",
+                  bg: "#EDE9FE",
+                  title: "Adapts its greeting per page",
+                  desc: `The welcome message and quick-reply chips update automatically as visitors navigate. Set a custom greeting for /pricing, /features, and /contact — ${assistantNameShort} always speaks to the right page.`,
+                },
               ].map(({ Icon, color, bg, title, desc }, i) => (
-                <FadeIn key={title} delay={0.05 * i} className="md:col-span-4">
+                <FadeIn key={title} delay={0.05 * (i % 3)} className="md:col-span-4">
                   <div
                     className="rounded-2xl p-6 border h-full"
                     style={{
@@ -1778,7 +1834,7 @@ export default function LandingPage() {
                       ],
                       ["Multi-site management", true, true, false],
                       ["AI answer quality analytics", true, false, false],
-                      ["Starts at $5/month", true, false, true],
+                      ["Free plan · no credit card", true, false, false],
                     ].map(([feature, veroliq, intercom, chatbot], i) => {
                       const cell = (v: unknown) =>
                         v === true ? (
@@ -1887,60 +1943,20 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* Toggle */}
-              <div className="flex items-center justify-center gap-3 mb-12">
-                <span
-                  style={{
-                    fontSize: "14px",
-                    color: annual
-                      ? "var(--color-text-tertiary)"
-                      : "var(--color-text-primary)",
-                    fontWeight: annual ? 400 : 500,
-                  }}
-                >
-                  Monthly
-                </span>
-                <button
-                  onClick={() => setAnnual(!annual)}
-                  className="relative w-12 h-6 rounded-full"
-                  style={{
-                    background: annual
-                      ? "var(--color-brand-600)"
-                      : "var(--color-slate-300)",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  <div
-                    className="absolute top-1 w-4 h-4 rounded-full bg-white transition-transform"
-                    style={{
-                      transform: annual
-                        ? "translateX(28px)"
-                        : "translateX(4px)",
-                    }}
-                  />
-                </button>
-                <span
-                  style={{
-                    fontSize: "14px",
-                    color: annual
-                      ? "var(--color-text-primary)"
-                      : "var(--color-text-tertiary)",
-                    fontWeight: annual ? 500 : 400,
-                  }}
-                >
-                  Annual
-                  <span
-                    className="ml-2 px-2 py-0.5 rounded-full text-xs font-semibold"
-                    style={{
-                      background: "var(--color-success-100)",
-                      color: "var(--color-success-700)",
-                    }}
-                  >
-                    Save 18%
-                  </span>
-                </span>
-              </div>
+              {/* Beta note */}
+              <p
+                className="text-center mb-8 px-4 py-3 rounded-xl max-w-xl mx-auto"
+                style={{
+                  fontSize: "13px",
+                  color: "var(--color-text-secondary)",
+                  background: "var(--color-brand-50)",
+                  border: "1px solid var(--color-brand-100)",
+                }}
+              >
+                ⭐ We&apos;re in public beta. The free plan is live now.
+                Paid plans launch soon — early adopters get
+                <strong style={{ color: "var(--color-brand-700)" }}> founding customer pricing locked in forever</strong>.
+              </p>
             </FadeIn>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
@@ -1958,11 +1974,13 @@ export default function LandingPage() {
                     `${platformName} branding`,
                   ],
                   cta: "Get started free",
+                  href: onboardingUrl,
+                  comingSoon: false,
                 },
                 {
                   name: "Starter",
-                  price: annual ? "$79" : "$8",
-                  period: annual ? "/yr" : "/mo",
+                  price: "$5",
+                  period: "/mo",
                   desc: "For founders ready to capture every lead",
                   features: [
                     "3 websites",
@@ -1971,15 +1989,16 @@ export default function LandingPage() {
                     "3 AI actions",
                     `Remove ${platformName} branding`,
                     "Email notifications",
+                    "LaunchPad support ops",
                   ],
-                  cta: "Start Starter",
+                  cta: "Coming soon",
                   highlight: true,
-                  badge: "Most popular",
+                  comingSoon: true,
                 },
                 {
                   name: "Growth",
-                  price: annual ? "$148" : "$15",
-                  period: annual ? "/yr" : "/mo",
+                  price: "$15",
+                  period: "/mo",
                   desc: "For teams with multiple sites",
                   features: [
                     "10 websites",
@@ -1988,9 +2007,11 @@ export default function LandingPage() {
                     "5 AI actions",
                     "Advanced analytics",
                     "Escalation alerts",
+                    "BYOK (your own API key)",
                     "Priority support",
                   ],
-                  cta: "Start Growth",
+                  cta: "Coming soon",
+                  comingSoon: true,
                 },
               ].map((p) => (
                 <PlanCard
@@ -2002,7 +2023,8 @@ export default function LandingPage() {
                   features={p.features}
                   cta={p.cta}
                   highlight={p.highlight}
-                  badge={p.badge}
+                  comingSoon={p.comingSoon}
+                  href={p.href}
                 />
               ))}
             </div>
@@ -2155,7 +2177,7 @@ export default function LandingPage() {
                 Every visitor who leaves without an answer is a lead you
                 didn&apos;t capture.
                 <br />
-                {platformName} fixes that — in one afternoon, for $5 a month.
+                {platformName} fixes that — in one afternoon, free.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
                 <Link
