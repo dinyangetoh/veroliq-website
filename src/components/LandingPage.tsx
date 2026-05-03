@@ -29,9 +29,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-const loginUrl = process.env.NEXT_PUBLIC_VEROLIQ_LOGIN_URL ?? "/auth/login";
-const onboardingUrl =
-  process.env.NEXT_PUBLIC_VEROLIQ_ONBOARDING_URL ?? "/onboarding";
+const baseUrl = process.env.NEXT_PUBLIC_VEROLIQ_BASE_URL ?? "https://app.veroliq.com";
+
+const loginUrl = `${baseUrl}/auth/login`;
+const signupUrl = `${baseUrl}/auth/signup`;
 
 /* ─── constants ─── */
 const FOUNDER_IMG =
@@ -625,7 +626,7 @@ export default function LandingPage() {
               Sign in
             </Link>
             <Link
-              href="/demo"
+              href={signupUrl}
               className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold"
               style={{
                 background: "var(--color-brand-600)",
@@ -634,7 +635,7 @@ export default function LandingPage() {
               }}
             >
               <Play size={12} fill="white" />
-              Live demo
+              Get started - free
             </Link>
           </div>
         </div>
@@ -750,7 +751,7 @@ export default function LandingPage() {
                   {/* CTAs */}
                   <div className="flex flex-wrap items-center gap-3 mb-8">
                     <Link
-                      href={onboardingUrl}
+                      href={signupUrl}
                       className="flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold"
                       style={{
                         background: "var(--color-brand-600)",
@@ -1974,7 +1975,7 @@ export default function LandingPage() {
                     `${platformName} branding`,
                   ],
                   cta: "Get started free",
-                  href: onboardingUrl,
+                  href: signupUrl,
                   comingSoon: false,
                 },
                 {
@@ -2181,7 +2182,7 @@ export default function LandingPage() {
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
                 <Link
-                  href={onboardingUrl}
+                  href={signupUrl}
                   className="flex items-center gap-2 px-8 py-4 rounded-xl font-semibold"
                   style={{
                     background: "var(--color-brand-600)",
