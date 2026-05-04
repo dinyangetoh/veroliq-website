@@ -868,7 +868,7 @@ export default function LandingPage() {
                   >
                     Your visitors ask.
                     <br />
-                    <GradientText>Vera AI answers.</GradientText>
+                    <span style={{ color: "var(--color-brand-400)" }}>Vera AI answers.</span>
                     <br />
                     You get the lead.
                   </h1>
