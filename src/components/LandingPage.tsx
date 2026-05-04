@@ -617,6 +617,7 @@ export default function LandingPage() {
           <div className="flex items-center gap-3">
             <Link
               href={loginUrl}
+              className="hidden sm:block"
               style={{
                 fontSize: "14px",
                 color: "var(--color-text-secondary)",
@@ -790,8 +791,8 @@ export default function LandingPage() {
 
               {/* ── Right: Person + floating cards ── */}
               <div
-                className="flex-1 relative self-end lg:self-auto w-full lg:max-w-[48%]"
-                style={{ minHeight: "440px", paddingBottom: "0" }}
+                className="flex-1 relative self-end lg:self-auto w-full lg:max-w-[48%] lg:min-h-[440px]"
+                style={{ paddingBottom: "0" }}
               >
                 <motion.div
                   initial={{ opacity: 0, scale: 0.97 }}
@@ -832,14 +833,12 @@ export default function LandingPage() {
                     />
                   </div>
 
-                  {/* Floating card: New lead */}
-                  <FloatingLeadCard />
-
-                  {/* Floating card: Stats */}
-                  <FloatingStatsCard />
-
-                  {/* Floating card: Chat snippet */}
-                  <FloatingChatCard />
+                  {/* Floating cards — desktop only (they overflow outside the image bounds) */}
+                  <div className="hidden lg:block">
+                    <FloatingLeadCard />
+                    <FloatingStatsCard />
+                    <FloatingChatCard />
+                  </div>
                 </motion.div>
               </div>
             </div>
@@ -2209,8 +2208,8 @@ export default function LandingPage() {
           style={{ borderColor: "var(--color-border)", background: "white" }}
         >
           <div className="max-w-6xl mx-auto px-6">
-            <div className="grid md:grid-cols-4 gap-8 mb-10">
-              <div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+              <div className="col-span-2 md:col-span-1">
                 <VeroliqLogo variant="marketing" size="sm" />
                 <p
                   className="mt-3"
