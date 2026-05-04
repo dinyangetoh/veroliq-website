@@ -10,20 +10,13 @@ import {
 import {
   ArrowRight,
   BarChart3,
-  Bell,
-  Bot,
   Check,
   ChevronDown,
-  Clock,
-  Layers,
-  MapPin,
   Menu,
-  MessageSquare,
   Monitor,
   Play,
   Send,
   Sparkles,
-  Target,
   TrendingUp,
   Users,
   X,
@@ -106,24 +99,22 @@ function GradientText({ children }: { children: React.ReactNode }) {
 /* ─── Hero visual: chat widget + floating cards ─── */
 function HeroVisual() {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.97 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.3, duration: 0.7, ease: "easeOut" }}
-      className="relative mx-auto"
-      style={{ maxWidth: "400px" }}
-    >
-      {/* Main chat widget */}
-      <div
-        className="rounded-2xl overflow-hidden"
+    <div className="relative" style={{ height: "480px", width: "100%" }}>
+      {/* Main chat widget — white background, positioned top-right */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.7, ease: "easeOut" }}
+        className="absolute overflow-hidden rounded-2xl"
         style={{
-          background: "var(--color-slate-900)",
-          border: "1px solid rgba(255,255,255,0.09)",
-          boxShadow: "0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06)",
-          marginTop: "48px",
+          right: 0,
+          top: 30,
+          width: "300px",
+          background: "#ffffff",
+          boxShadow: "0 24px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06)",
         }}
       >
-        {/* Widget header */}
+        {/* Header */}
         <div
           style={{
             background: "var(--color-brand-600)",
@@ -135,57 +126,58 @@ function HeroVisual() {
         >
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ background: "rgba(255,255,255,0.2)" }}
+            style={{ background: "rgba(255,255,255,0.2)", fontSize: "13px", fontWeight: 700, color: "white" }}
           >
-            <Bot size={16} color="white" />
+            V
           </div>
-          <div>
-            <p style={{ fontSize: "14px", fontWeight: 600, color: "white", lineHeight: 1 }}>
+          <div className="flex-1">
+            <p style={{ fontSize: "13px", fontWeight: 600, color: "white", lineHeight: 1 }}>
               Vera AI
             </p>
             <p style={{ fontSize: "10px", color: "rgba(255,255,255,0.65)", marginTop: "2px" }}>
               ✦ You can ask me anything
             </p>
           </div>
+          <span style={{ color: "rgba(255,255,255,0.6)", fontSize: "18px", lineHeight: 1 }}>×</span>
         </div>
-        {/* Widget body */}
-        <div style={{ padding: "16px" }}>
+        {/* Body */}
+        <div style={{ padding: "14px", background: "#F8FAFD" }}>
           <div
-            className="rounded-xl rounded-tl-sm px-3 py-2.5 mb-3"
+            className="rounded-xl rounded-tl-sm"
             style={{
-              background: "rgba(255,255,255,0.06)",
-              fontSize: "13px",
-              color: "rgba(255,255,255,0.75)",
-              lineHeight: 1.6,
+              background: "#ffffff",
+              padding: "10px 12px",
+              fontSize: "12.5px",
+              lineHeight: 1.55,
+              color: "#2D3748",
+              boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+              marginBottom: "10px",
             }}
           >
             Welcome! I can answer questions about pricing, features, or walk you through a free setup. What would you like to know?
           </div>
-          <div className="flex flex-wrap gap-1.5 mb-3">
-            {["What&apos;s the pricing?", "Book a demo", "How does it work?"].map((chip, i) => (
+          <div className="flex flex-wrap gap-1.5 mb-2.5">
+            {["What's the pricing?", "Book a demo", "How does it work?"].map((chip) => (
               <span
-                key={i}
-                className="px-2.5 py-1 rounded-full text-xs font-medium"
+                key={chip}
+                className="text-xs font-medium"
                 style={{
-                  background: "rgba(29,78,216,0.2)",
-                  border: "1px solid rgba(96,165,250,0.25)",
-                  color: "var(--color-brand-300)",
+                  padding: "5px 10px",
+                  borderRadius: "100px",
+                  border: "1px solid rgba(26,86,219,0.25)",
+                  color: "var(--color-brand-600)",
+                  background: "#ffffff",
                 }}
               >
-                {i === 0 ? "What's the pricing?" : chip}
+                {chip}
               </span>
             ))}
           </div>
           <div
-            className="flex items-center gap-2 rounded-xl px-3 py-2"
-            style={{
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.1)",
-            }}
+            className="flex items-center gap-2 rounded-lg"
+            style={{ background: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", padding: "8px 10px" }}
           >
-            <span style={{ flex: 1, fontSize: "12px", color: "rgba(255,255,255,0.3)" }}>
-              Ask anything...
-            </span>
+            <span style={{ flex: 1, fontSize: "12px", color: "#999" }}>Ask anything...</span>
             <div
               className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
               style={{ background: "var(--color-brand-600)" }}
@@ -194,106 +186,70 @@ function HeroVisual() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Lead notification — top left */}
+      {/* Lead notification — left side */}
       <motion.div
-        initial={{ opacity: 0, x: -20, y: 10 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.9, duration: 0.6, ease: "easeOut" }}
+        className="absolute"
         style={{
-          position: "absolute",
-          top: "16px",
-          left: "-24px",
+          left: "-20px",
+          top: "90px",
           background: "white",
-          borderRadius: "14px",
+          borderRadius: "12px",
+          padding: "12px 16px",
+          width: "230px",
           boxShadow: "0 20px 60px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.08)",
-          padding: "12px 14px",
-          minWidth: "210px",
           border: "1px solid rgba(0,0,0,0.06)",
         }}
       >
-        <p
-          style={{
-            fontSize: "9px",
-            fontWeight: 700,
-            letterSpacing: "0.08em",
-            color: "var(--color-success-600)",
-            textTransform: "uppercase",
-            marginBottom: "5px",
-          }}
-        >
-          New lead captured
-        </p>
-        <p
-          style={{
-            fontSize: "13px",
-            fontWeight: 500,
-            color: "var(--color-text-primary)",
-            marginBottom: "4px",
-          }}
-        >
+        <div className="flex items-center gap-1.5 mb-1">
+          <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#10B981" }} />
+          <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.08em", color: "#10B981", textTransform: "uppercase" }}>
+            New lead captured
+          </p>
+        </div>
+        <p style={{ fontSize: "13px", fontWeight: 600, color: "#1A202C", marginBottom: "4px" }}>
           sarah.k@techstartup.io
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <span
-            className="px-2 py-0.5 rounded text-xs font-semibold"
-            style={{ background: "#EFF6FF", color: "#1D4ED8" }}
+            className="text-xs font-semibold"
+            style={{ background: "rgba(26,86,219,0.10)", color: "var(--color-brand-600)", padding: "1px 6px", borderRadius: "4px" }}
           >
-            💰 Pricing
+            Pricing
           </span>
-          <span style={{ fontSize: "10px", color: "var(--color-text-tertiary)" }}>
-            Just now · /pricing
-          </span>
+          <span style={{ fontSize: "10px", color: "#999" }}>Just now · /pricing</span>
         </div>
       </motion.div>
 
-      {/* Stats pill — bottom right */}
+      {/* Stats pill — bottom left */}
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.1, duration: 0.6, ease: "easeOut" }}
+        className="absolute"
         style={{
-          position: "absolute",
-          bottom: "28px",
-          right: "-24px",
+          left: "30px",
+          bottom: "60px",
           background: "var(--color-slate-900)",
-          borderRadius: "14px",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
+          borderRadius: "12px",
           padding: "14px 18px",
           border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: "0 8px 30px rgba(0,0,0,0.30)",
         }}
       >
-        <p
-          style={{
-            fontSize: "9px",
-            textTransform: "uppercase",
-            letterSpacing: "0.07em",
-            color: "var(--color-slate-500)",
-            marginBottom: "3px",
-          }}
-        >
+        <p style={{ fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "rgba(255,255,255,0.50)", marginBottom: "3px" }}>
           LEADS THIS WEEK
         </p>
-        <p
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "34px",
-            fontWeight: 700,
-            color: "white",
-            lineHeight: 1,
-          }}
-        >
-          47
+        <p style={{ fontSize: "36px", fontWeight: 700, color: "white", lineHeight: 1 }}>47</p>
+        <p style={{ fontSize: "12px", color: "#10B981", fontWeight: 500, marginTop: "3px" }}>
+          ↑ 23% vs last week
         </p>
-        <div className="flex items-center gap-1 mt-1">
-          <TrendingUp size={11} style={{ color: "var(--color-success-400)" }} />
-          <span style={{ fontSize: "11px", color: "var(--color-success-400)", fontWeight: 500 }}>
-            ↑ 23% vs last week
-          </span>
-        </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -981,10 +937,8 @@ export default function LandingPage() {
               </div>
 
               {/* Right: Hero visual — desktop only */}
-              <div className="flex-1 w-full lg:max-w-[48%] lg:min-h-[440px]">
-                <div className="hidden lg:block">
-                  <HeroVisual />
-                </div>
+              <div className="hidden lg:flex flex-1 lg:max-w-[48%]" style={{ minHeight: "480px" }}>
+                <HeroVisual />
               </div>
             </div>
           </div>
@@ -1352,90 +1306,66 @@ export default function LandingPage() {
                 </div>
               </FadeIn>
 
-              {/* Row 2 — Engage (reversed) */}
+              {/* Row 2 — Customise (reversed) */}
               <FadeIn>
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                  {/* Lead list mock */}
-                  <div
-                    className="rounded-2xl p-7 border order-2 md:order-1"
-                    style={{ background: "#F0FDF4", borderColor: "#DCFCE7" }}
-                  >
-                    <div className="flex items-center gap-2 mb-4">
-                      <Target size={16} style={{ color: "var(--color-success-600)" }} />
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontWeight: 600,
-                          color: "var(--color-success-700)",
-                        }}
-                      >
-                        Live lead capture
-                      </span>
+                  {/* Widget customiser mock */}
+                  <div className="rounded-2xl overflow-hidden border order-2 md:order-1" style={{ borderColor: "var(--color-border)", boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
+                    {/* Mock browser bar */}
+                    <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: "#F1F5F9", borderBottom: "1px solid var(--color-border)" }}>
+                      <div className="flex gap-1.5">
+                        {["#FF5F57","#FFBD2E","#28CA41"].map((c) => (
+                          <div key={c} className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />
+                        ))}
+                      </div>
+                      <span style={{ fontSize: "11px", color: "#94A3B8", marginLeft: "8px" }}>Widget Customiser</span>
                     </div>
-                    <div className="space-y-2">
-                      {[
-                        { email: "sarah@techcorp.io", intent: "💰 Pricing", score: 92 },
-                        { email: "james@startup.com", intent: "🎯 Demo", score: 87 },
-                        { email: "priya@venture.co", intent: "💰 Pricing", score: 79 },
-                      ].map((lead, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center gap-3 p-2.5 rounded-xl"
-                          style={{
-                            background: "white",
-                            border: "1px solid var(--color-success-100)",
-                          }}
-                        >
-                          <div
-                            className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-                            style={{
-                              background: "var(--color-success-100)",
-                              color: "var(--color-success-700)",
-                            }}
-                          >
-                            {lead.email.charAt(0).toUpperCase()}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p
-                              style={{
-                                fontSize: "12px",
-                                color: "var(--color-text-primary)",
-                                fontWeight: 500,
-                              }}
-                              className="truncate"
-                            >
-                              {lead.email}
-                            </p>
-                            <span
-                              style={{
-                                fontSize: "10px",
-                                fontWeight: 600,
-                                color: "#15803D",
-                              }}
-                            >
-                              {lead.intent}
-                            </span>
-                          </div>
-                          <span
-                            style={{
-                              fontSize: "11px",
-                              color: "var(--color-success-600)",
-                              fontWeight: 600,
-                              flexShrink: 0,
-                            }}
-                          >
-                            {lead.score}
-                          </span>
+                    {/* Customiser body */}
+                    <div className="flex gap-4 p-4" style={{ background: "#F8FAFD" }}>
+                      {/* Left: controls */}
+                      <div style={{ flex: 1 }}>
+                        <p style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.06em", color: "#94A3B8", textTransform: "uppercase", marginBottom: "7px" }}>BRAND COLOUR</p>
+                        <div className="flex items-center gap-2 mb-4">
+                          <div className="rounded" style={{ width: "26px", height: "26px", background: "#1A56DB", border: "2px solid rgba(0,0,0,0.10)", flexShrink: 0 }} />
+                          <span style={{ fontSize: "11px", fontWeight: 600, color: "#2D3748", fontFamily: "var(--font-mono)" }}>#1A56DB</span>
                         </div>
-                      ))}
+                        <p style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.06em", color: "#94A3B8", textTransform: "uppercase", marginBottom: "7px" }}>POSITION</p>
+                        <div className="grid grid-cols-2 gap-1.5 mb-4">
+                          <div className="text-center rounded py-1.5 text-xs font-semibold" style={{ border: "1.5px solid var(--color-brand-600)", color: "var(--color-brand-600)", background: "rgba(26,86,219,0.06)" }}>Bottom Right</div>
+                          <div className="text-center rounded py-1.5 text-xs" style={{ border: "1px solid rgba(0,0,0,0.10)", color: "#94A3B8" }}>Bottom Left</div>
+                        </div>
+                        <p style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.06em", color: "#94A3B8", textTransform: "uppercase", marginBottom: "7px" }}>CONVERSATION STARTERS</p>
+                        <div className="flex flex-col gap-1.5">
+                          {["What's the pricing?", "Book a demo", "How does it work?"].map((s) => (
+                            <div key={s} className="rounded px-2.5 py-1.5 text-xs" style={{ background: "white", border: "1px solid rgba(0,0,0,0.08)", color: "#4A5568" }}>{s}</div>
+                          ))}
+                        </div>
+                      </div>
+                      {/* Right: live preview */}
+                      <div style={{ width: "130px", flexShrink: 0 }}>
+                        <p style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.06em", color: "#94A3B8", textTransform: "uppercase", marginBottom: "7px" }}>LIVE PREVIEW</p>
+                        <div className="rounded-xl overflow-hidden relative" style={{ background: "#E8EDF4", height: "185px" }}>
+                          <div className="absolute bottom-2 right-2" style={{ width: "105px" }}>
+                            <div className="rounded-xl rounded-bl-sm p-2 mb-1.5" style={{ background: "var(--color-brand-600)" }}>
+                              <p style={{ fontSize: "9px", fontWeight: 600, color: "white" }}>Vera AI</p>
+                              <p style={{ fontSize: "8px", color: "rgba(255,255,255,0.70)" }}>● You can ask me anything</p>
+                            </div>
+                            <div className="rounded-lg p-2" style={{ background: "white", boxShadow: "0 2px 8px rgba(0,0,0,0.10)" }}>
+                              <p style={{ fontSize: "8px", color: "#4A5568", lineHeight: 1.5, marginBottom: "5px" }}>Hi! How can I help you today?</p>
+                              <div className="flex flex-wrap gap-1">
+                                {["Pricing", "Demo"].map((t) => (
+                                  <span key={t} style={{ fontSize: "7px", padding: "2px 5px", borderRadius: "10px", border: "1px solid rgba(26,86,219,0.25)", color: "var(--color-brand-600)" }}>{t}</span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="order-1 md:order-2">
-                    <p
-                      className="text-xs font-bold tracking-widest mb-3"
-                      style={{ color: "var(--color-success-600)" }}
-                    >
-                      STEP 02 — ENGAGE
+                    <p className="text-xs font-bold tracking-widest mb-3" style={{ color: "var(--color-brand-600)" }}>
+                      STEP 02 — CUSTOMISE
                     </p>
                     <h3
                       style={{
@@ -1446,7 +1376,7 @@ export default function LandingPage() {
                         lineHeight: 1.2,
                       }}
                     >
-                      Captures lead emails in conversation.
+                      Brand it. Place it. Make it yours.
                     </h3>
                     <p
                       style={{
@@ -1456,30 +1386,17 @@ export default function LandingPage() {
                         marginBottom: "20px",
                       }}
                     >
-                      When {assistantNameShort} detects buying intent, the email is
-                      captured naturally inside the chat — no pop-up, no form. Lead lands
-                      in your dashboard instantly.
+                      The {assistantNameShort} widget matches your brand colours, uses your company name, and greets visitors with a message you write — all via a live preview interface.
                     </p>
                     <ul className="space-y-2">
                       {[
-                        "Detects buying intent signals in real time",
-                        "Captures email naturally — no interruptive pop-ups",
-                        "Lead score, page visited, and conversation context all saved",
+                        "Brand colour, greeting message, and position control",
+                        "Set up to 3 conversation starters to guide visitors",
+                        "Desktop and mobile preview before you go live",
                       ].map((item) => (
                         <li key={item} className="flex items-start gap-2.5">
-                          <Check
-                            size={13}
-                            className="mt-1 flex-shrink-0"
-                            style={{ color: "var(--color-success-600)" }}
-                          />
-                          <span
-                            style={{
-                              fontSize: "14px",
-                              color: "var(--color-text-secondary)",
-                            }}
-                          >
-                            {item}
-                          </span>
+                          <Check size={13} className="mt-1 flex-shrink-0" style={{ color: "var(--color-success-600)" }} />
+                          <span style={{ fontSize: "14px", color: "var(--color-text-secondary)" }}>{item}</span>
                         </li>
                       ))}
                     </ul>
@@ -1487,15 +1404,12 @@ export default function LandingPage() {
                 </div>
               </FadeIn>
 
-              {/* Row 3 — Analyse */}
+              {/* Row 3 — Convert */}
               <FadeIn>
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div>
-                    <p
-                      className="text-xs font-bold tracking-widest mb-3"
-                      style={{ color: "var(--color-veroliq-gold)" }}
-                    >
-                      STEP 03 — ANALYSE
+                    <p className="text-xs font-bold tracking-widest mb-3" style={{ color: "var(--color-success-600)" }}>
+                      STEP 03 — CONVERT
                     </p>
                     <h3
                       style={{
@@ -1506,7 +1420,7 @@ export default function LandingPage() {
                         lineHeight: 1.2,
                       }}
                     >
-                      Know exactly what&apos;s working — and why.
+                      From sign-up to first lead in one afternoon.
                     </h3>
                     <p
                       style={{
@@ -1516,205 +1430,65 @@ export default function LandingPage() {
                         marginBottom: "20px",
                       }}
                     >
-                      Which pages drive the most chats, which questions the AI can&apos;t
-                      answer, and exactly how many leads you captured this week — all in
-                      one dashboard.
+                      {assistantNameShort} doesn&apos;t just answer questions — she actively identifies when a visitor is interested and captures their email before they leave. No forms, no friction.
                     </p>
                     <ul className="space-y-2">
                       {[
-                        "Conversion pipeline from first visit to captured email",
-                        "AI health metrics — answer rate and confidence scores",
-                        "Export leads to CSV or connect your CRM via webhook",
+                        "Detects buying intent from conversation context",
+                        "Asks for contact details naturally, mid-conversation",
+                        "Every lead lands in your Veroliq dashboard instantly",
+                        "Export to CSV or pipe to your CRM via webhooks",
                       ].map((item) => (
                         <li key={item} className="flex items-start gap-2.5">
-                          <Check
-                            size={13}
-                            className="mt-1 flex-shrink-0"
-                            style={{ color: "var(--color-success-600)" }}
-                          />
-                          <span
-                            style={{
-                              fontSize: "14px",
-                              color: "var(--color-text-secondary)",
-                            }}
-                          >
-                            {item}
-                          </span>
+                          <Check size={13} className="mt-1 flex-shrink-0" style={{ color: "var(--color-success-600)" }} />
+                          <span style={{ fontSize: "14px", color: "var(--color-text-secondary)" }}>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  {/* Analytics bar chart mock */}
-                  <div
-                    className="rounded-2xl p-7 border"
-                    style={{
-                      background: "var(--color-brand-50)",
-                      borderColor: "var(--color-brand-100)",
-                    }}
-                  >
-                    <div className="flex items-center gap-2 mb-5">
-                      <BarChart3 size={16} style={{ color: "var(--color-brand-600)" }} />
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontWeight: 600,
-                          color: "var(--color-brand-700)",
-                        }}
-                      >
-                        This week&apos;s performance
-                      </span>
+                  {/* Leads list mock */}
+                  <div className="rounded-2xl overflow-hidden border" style={{ borderColor: "var(--color-border)", boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
+                    <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: "#F1F5F9", borderBottom: "1px solid var(--color-border)" }}>
+                      <div className="flex gap-1.5">
+                        {["#FF5F57","#FFBD2E","#28CA41"].map((c) => (
+                          <div key={c} className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />
+                        ))}
+                      </div>
+                      <span style={{ fontSize: "11px", color: "#94A3B8", marginLeft: "8px" }}>Leads · Today</span>
                     </div>
-                    {[
-                      {
-                        label: "Page views",
-                        value: 1420,
-                        max: 1420,
-                        color: "var(--color-brand-600)",
-                      },
-                      {
-                        label: "Widget opens",
-                        value: 312,
-                        max: 1420,
-                        color: "var(--color-brand-400)",
-                      },
-                      {
-                        label: "Leads captured",
-                        value: 47,
-                        max: 1420,
-                        color: "var(--color-success-500)",
-                      },
-                    ].map(({ label, value, max, color }) => (
-                      <div key={label} className="mb-4">
-                        <div className="flex justify-between mb-1.5">
-                          <span
-                            style={{ fontSize: "13px", color: "var(--color-text-secondary)" }}
-                          >
-                            {label}
-                          </span>
-                          <span
-                            style={{
-                              fontSize: "13px",
-                              fontWeight: 600,
-                              color: "var(--color-text-primary)",
-                            }}
-                          >
-                            {value.toLocaleString()}
-                          </span>
-                        </div>
+                    <div className="p-4 flex flex-col gap-2" style={{ background: "#F8FAFD" }}>
+                      {[
+                        { init: "S", grad: "linear-gradient(135deg,#667eea,#764ba2)", email: "sarah.k@techstartup.io", tag: "Pricing", tagColor: "var(--color-brand-600)", tagBg: "rgba(26,86,219,0.10)", time: "2 min ago", dot: true },
+                        { init: "M", grad: "linear-gradient(135deg,#f093fb,#f5576c)", email: "mark@designagency.co", tag: "Agency plan", tagColor: "#10B981", tagBg: "rgba(16,185,129,0.10)", time: "18 min ago", dot: true },
+                        { init: "J", grad: "linear-gradient(135deg,#4facfe,#00f2fe)", email: "james.r@ecomstore.io", tag: "Demo request", tagColor: "#F97316", tagBg: "rgba(249,115,22,0.10)", time: "1 hr ago", dot: false },
+                      ].map((lead) => (
                         <div
-                          className="rounded-full overflow-hidden"
-                          style={{
-                            height: "6px",
-                            background: "var(--color-brand-100)",
-                          }}
+                          key={lead.email}
+                          className="flex items-center gap-3 rounded-xl p-3"
+                          style={{ background: "white", border: "1px solid rgba(0,0,0,0.06)" }}
                         >
                           <div
-                            style={{
-                              width: `${(value / max) * 100}%`,
-                              height: "6px",
-                              background: color,
-                              borderRadius: "9999px",
-                            }}
-                          />
+                            className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                            style={{ background: lead.grad }}
+                          >
+                            {lead.init}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="truncate" style={{ fontSize: "13px", fontWeight: 600, color: "#1A202C" }}>{lead.email}</p>
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              <span className="text-xs font-semibold" style={{ background: lead.tagBg, color: lead.tagColor, padding: "1px 6px", borderRadius: "4px" }}>{lead.tag}</span>
+                              <span style={{ fontSize: "11px", color: "#94A3B8" }}>{lead.time}</span>
+                            </div>
+                          </div>
+                          {lead.dot && <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: "#10B981" }} />}
                         </div>
-                      </div>
-                    ))}
-                    <div
-                      className="flex items-center gap-2 mt-2 pt-4"
-                      style={{ borderTop: "1px solid var(--color-brand-100)" }}
-                    >
-                      <TrendingUp size={14} style={{ color: "var(--color-success-600)" }} />
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          color: "var(--color-success-700)",
-                          fontWeight: 500,
-                        }}
-                      >
-                        +22% leads vs last week
-                      </span>
+                      ))}
                     </div>
                   </div>
                 </div>
               </FadeIn>
             </div>
 
-            {/* 6-card grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[
-                {
-                  Icon: Clock,
-                  color: "var(--color-info-600)",
-                  bg: "var(--color-info-100)",
-                  title: "Answers at 3am on a Sunday",
-                  desc: `Time zones and bank holidays don't stop ${assistantNameShort}. Visitors get a real answer immediately — and you wake up to warm leads.`,
-                },
-                {
-                  Icon: BarChart3,
-                  color: "var(--color-veroliq-gold)",
-                  bg: "var(--color-veroliq-gold-light)",
-                  title: "Tells you what's working",
-                  desc: "Which pages drive the most chats, which questions the AI can't answer, and exactly how many leads you captured this week.",
-                },
-                {
-                  Icon: Layers,
-                  color: "var(--color-warning-600)",
-                  bg: "var(--color-warning-50)",
-                  title: "One dashboard, every client site",
-                  desc: "Agencies manage all client websites in one place — per-site analytics, knowledge bases, and widget configs.",
-                },
-                {
-                  Icon: Bell,
-                  color: "var(--color-brand-600)",
-                  bg: "var(--color-brand-50)",
-                  title: "Reaches out before they click",
-                  desc: `${assistantNameShort} shows a proactive callout after a configurable delay — greeting visitors who haven't clicked the widget yet. Returning users see a "welcome back" prompt.`,
-                },
-                {
-                  Icon: MapPin,
-                  color: "var(--color-success-600)",
-                  bg: "var(--color-success-50)",
-                  title: "Follows their journey, page by page",
-                  desc: `Every page a visitor visits — even on React and Next.js SPAs — is tracked in real time. ${platformName} builds a full picture of where leads came from.`,
-                },
-                {
-                  Icon: MessageSquare,
-                  color: "#7C3AED",
-                  bg: "#EDE9FE",
-                  title: "Adapts its greeting per page",
-                  desc: `The welcome message and quick-reply chips update automatically as visitors navigate. Set a custom greeting for /pricing, /features, and /contact — ${assistantNameShort} always speaks to the right page.`,
-                },
-              ].map(({ Icon, color, bg, title, desc }, i) => (
-                <FadeIn key={title} delay={0.05 * (i % 3)}>
-                  <div
-                    className="rounded-2xl p-6 border h-full"
-                    style={{
-                      background: "var(--color-surface)",
-                      borderColor: "var(--color-border)",
-                    }}
-                  >
-                    <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
-                      style={{ background: bg }}
-                    >
-                      <Icon size={16} style={{ color }} />
-                    </div>
-                    <h3 style={{ fontSize: "15px", fontWeight: 600, marginBottom: "8px" }}>
-                      {title}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: "13px",
-                        color: "var(--color-text-secondary)",
-                        lineHeight: 1.7,
-                      }}
-                    >
-                      {desc}
-                    </p>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -1757,76 +1531,49 @@ export default function LandingPage() {
               </div>
             </FadeIn>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* Connecting line — desktop only */}
+              <div
+                className="absolute hidden lg:block"
+                style={{
+                  top: "28px",
+                  left: "calc(12.5% + 18px)",
+                  right: "calc(12.5% + 18px)",
+                  height: "1px",
+                  background: "linear-gradient(90deg, rgba(26,86,219,0.4), rgba(26,86,219,0.2), rgba(26,86,219,0.4))",
+                }}
+              />
               {[
-                {
-                  step: "01",
-                  icon: "🚀",
-                  title: "Sign up free",
-                  desc: "Create your account in 30 seconds. No credit card required, no sales call needed.",
-                  color: "var(--color-brand-400)",
-                },
-                {
-                  step: "02",
-                  icon: "🧠",
-                  title: "Enter your website URL",
-                  desc: `${platformName} crawls your site and builds ${assistantNameShort}'s knowledge base. Done in under a minute.`,
-                  color: "#A78BFA",
-                },
-                {
-                  step: "03",
-                  icon: "🎨",
-                  title: "Customise & embed",
-                  desc: "Match your brand colours, set your greeting, then paste one script tag. That's it.",
-                  color: "#F59E0B",
-                },
-                {
-                  step: "04",
-                  icon: "🎯",
-                  title: "Watch leads arrive",
-                  desc: `${assistantNameShort} starts conversations, captures intent, and drops qualified leads into your dashboard.`,
-                  color: "var(--color-success-400)",
-                },
-              ].map(({ step, icon, title, desc, color }, i) => (
-                <FadeIn key={step} delay={i * 0.1}>
-                  <div
-                    className="rounded-2xl p-7 h-full"
-                    style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.07)",
-                    }}
-                  >
-                    <div className="text-3xl mb-5">{icon}</div>
-                    <span
+                { num: 1, title: "Sign up free", desc: "Create your account in 30 seconds. No credit card required, no sales call needed." },
+                { num: 2, title: "Enter your website URL", desc: `${platformName} crawls your site and builds ${assistantNameShort}'s knowledge base. Done in under a minute.` },
+                { num: 3, title: "Customise & embed", desc: "Match your brand colours, set your greeting, then paste one script tag. That's it." },
+                { num: 4, title: "Watch leads arrive", desc: `${assistantNameShort} starts conversations, captures intent, and drops qualified leads into your dashboard.` },
+              ].map(({ num, title, desc }, i) => (
+                <FadeIn key={num} delay={i * 0.1}>
+                  <div className="text-center px-2">
+                    {/* Numbered circle */}
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10"
                       style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "11px",
-                        color,
-                        fontWeight: 700,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.1em",
+                        background: "rgba(26,86,219,0.20)",
+                        border: "1.5px solid rgba(26,86,219,0.40)",
                       }}
                     >
-                      Step {step}
-                    </span>
-                    <h3
-                      style={{
-                        fontSize: "17px",
-                        fontWeight: 600,
-                        color: "white",
-                        marginTop: "6px",
-                        marginBottom: "10px",
-                      }}
-                    >
+                      <span
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: "18px",
+                          fontWeight: 700,
+                          color: "var(--color-brand-300)",
+                        }}
+                      >
+                        {num}
+                      </span>
+                    </div>
+                    <h3 style={{ fontSize: "17px", fontWeight: 600, color: "white", marginBottom: "10px" }}>
                       {title}
                     </h3>
-                    <p
-                      style={{
-                        fontSize: "14px",
-                        color: "var(--color-slate-400)",
-                        lineHeight: 1.7,
-                      }}
-                    >
+                    <p style={{ fontSize: "14px", color: "var(--color-slate-400)", lineHeight: 1.6 }}>
                       {desc}
                     </p>
                   </div>
