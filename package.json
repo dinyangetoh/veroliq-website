@@ -20,7 +20,7 @@
   ],
   "type": "module",
   "scripts": {
-    "dev": "next dev --port 2999",
+    "dev": "next dev --port 2888",
     "build": "next build",
     "start": "next start"
   },
