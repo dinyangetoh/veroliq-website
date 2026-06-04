@@ -657,29 +657,43 @@ export default function LandingPage() {
           <div className="hidden md:flex items-center gap-6">
             {[
               ["Features", "#features"],
-              ["How it works", "#how-it-works"],
+              ["Setup guide", "/how-it-works"],
               ["Pricing", "#pricing"],
               ["FAQ", "#faq"],
-            ].map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                style={{
-                  fontSize: "14px",
-                  color: "var(--color-text-secondary)",
-                  textDecoration: "none",
-                }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "var(--color-text-primary)")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color =
-                    "var(--color-text-secondary)")
-                }
-              >
-                {label}
-              </a>
-            ))}
+            ].map(([label, href]) =>
+              href.startsWith("/") ? (
+                <Link
+                  key={label}
+                  href={href}
+                  style={{
+                    fontSize: "14px",
+                    color: "var(--color-text-secondary)",
+                    textDecoration: "none",
+                  }}
+                >
+                  {label}
+                </Link>
+              ) : (
+                <a
+                  key={label}
+                  href={href}
+                  style={{
+                    fontSize: "14px",
+                    color: "var(--color-text-secondary)",
+                    textDecoration: "none",
+                  }}
+                  onMouseEnter={(e) =>
+                    ((e.currentTarget as HTMLElement).style.color = "var(--color-text-primary)")
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLElement).style.color =
+                      "var(--color-text-secondary)")
+                  }
+                >
+                  {label}
+                </a>
+              ),
+            )}
           </div>
           <div className="flex items-center gap-3">
             <Link
@@ -733,24 +747,40 @@ export default function LandingPage() {
             <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
               {[
                 ["Features", "#features"],
-                ["How it works", "#how-it-works"],
+                ["Setup guide", "/how-it-works"],
                 ["Pricing", "#pricing"],
                 ["FAQ", "#faq"],
-              ].map(([label, href]) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="py-2.5 text-sm font-medium"
-                  style={{
-                    color: "var(--color-text-primary)",
-                    textDecoration: "none",
-                    borderBottom: "1px solid var(--color-border)",
-                  }}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {label}
-                </a>
-              ))}
+              ].map(([label, href]) =>
+                href.startsWith("/") ? (
+                  <Link
+                    key={label}
+                    href={href}
+                    className="py-2.5 text-sm font-medium"
+                    style={{
+                      color: "var(--color-text-primary)",
+                      textDecoration: "none",
+                      borderBottom: "1px solid var(--color-border)",
+                    }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                ) : (
+                  <a
+                    key={label}
+                    href={href}
+                    className="py-2.5 text-sm font-medium"
+                    style={{
+                      color: "var(--color-text-primary)",
+                      textDecoration: "none",
+                      borderBottom: "1px solid var(--color-border)",
+                    }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {label}
+                  </a>
+                ),
+              )}
               <div className="flex gap-3 pt-3">
                 <Link
                   href={loginUrl}
@@ -1526,7 +1556,10 @@ export default function LandingPage() {
                 </h2>
                 <p style={{ fontSize: "15px", color: "var(--color-slate-400)" }}>
                   No developers, no training data, no contracts. If you can paste a line
-                  of code, you&apos;re set.
+                  of code, you&apos;re set.{" "}
+                  <Link href="/how-it-works" style={{ color: "var(--color-brand-300)", textDecoration: "underline" }}>
+                    See full setup guide →
+                  </Link>
                 </p>
               </div>
             </FadeIn>
@@ -1912,7 +1945,7 @@ export default function LandingPage() {
               },
               {
                 q: "Does it work with WordPress, Webflow, or Shopify?",
-                a: `Yes. ${platformName} works on any website that allows custom HTML. Step-by-step guides for WordPress (plugin available), Webflow (custom code embed), Shopify (theme.liquid), and standard HTML. Our support team will help if you're unsure.`,
+                a: `Yes. ${platformName} works on any website that allows custom HTML. See our step-by-step install guides for HTML, WordPress, Webflow, and Shopify at veroliq.com/how-it-works.`,
               },
               {
                 q: "What is an AI Action?",
@@ -2082,6 +2115,7 @@ export default function LandingPage() {
                     heading: "Product",
                     links: [
                       { label: "Features", href: "/#features" },
+                      { label: "Setup guide", href: "/how-it-works" },
                       { label: "How it works", href: "/#how-it-works" },
                       { label: "Pricing", href: "/#pricing" },
                     ],
